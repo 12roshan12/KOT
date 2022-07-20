@@ -1,0 +1,52 @@
+export class ReportsPostModel{
+    txYearId;
+    monthId;
+    fiscalyearId;
+    fiscalYearId:any;
+    status: any;
+    bankId: number;
+  
+    banksId: number;
+    branchCode: string;
+    userId: string;
+    page: number;
+    size: number;
+    dateFrom: string;
+    fromNDate: string;
+    toNDate: string;
+    dateTo: string;
+    branchId: number;
+    id: any;
+    dateRadio: any;
+    dateType: any;
+    treasuryId: any;
+    dtcoId:any;
+    lang: any;
+    rcAgencyId: any;
+    departmentId:any;
+    ministryId: any;
+    type:number;
+    provinceId: string;
+    url;
+    fromDate;
+    currencyId;
+    toDate;
+    typeId:any;
+    localBodyId;
+    tariffId;
+    refId;
+    deductionTypeId:any;
+    title;
+    reportTypeId = 1;
+    cashierId;
+    dueAmount;
+    isSummaryReport;
+    yearId;
+    billTypeId;
+    monthDateSelect ='month';
+    accountId:any;
+    agencyId:any;
+    formatType = 1;
+    bankAccountId: number;
+
+}

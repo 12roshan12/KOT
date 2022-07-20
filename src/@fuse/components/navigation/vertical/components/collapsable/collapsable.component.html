@@ -1,0 +1,66 @@
+<div class="fuse-vertical-navigation-item-wrapper" [class.fuse-vertical-navigation-item-has-subtitle]="!!item.subtitle"
+    [ngClass]="item.classes?.wrapper">
+
+    <!-- ********collapsable head -->
+    <div class="fuse-vertical-navigation-item" [ngClass]="{'fuse-vertical-navigation-item-disabled': item.disabled}"
+        [matTooltip]="item.tooltip || ''" (click)="toggleCollapsable()">
+    
+        <ng-container>
+
+            <i class="fuse-vertical-navigation-item-icon mr-2" [class]="item.icon"></i>
+        </ng-container>
+
+        <div class="fuse-vertical-navigation-item-title-wrapper">
+
+            <ng-container>
+                <div class="fuse-vertical-navigation-item-subtitle">
+                    <span *ngIf="activeLang=='tr'" [ngClass]="item.classes?.subtitle">
+                        <span>{{item.nname}}</span>
+                    </span>
+                    <span *ngIf="activeLang=='en'" [ngClass]="item.classes?.subtitle">
+                        <span>{{item.ename}}</span>
+                    </span>
+                </div>
+                
+            </ng-container>
+          
+        </div>
+
+        <ng-container *ngIf="item.badge">
+            <div class="fuse-vertical-navigation-item-badge">
+                <div class="fuse-vertical-navigation-item-badge-content" [ngClass]="item.badge.classes">
+                    {{item.badge.title}}
+                </div>
+            </div>
+        </ng-container>
+
+        <mat-icon class="fuse-vertical-navigation-item-arrow" [svgIcon]="'heroicons_solid:chevron-right'">
+        </mat-icon>
+
+    </div>
+
+</div>
+
+<!-- *********collapsable child -->
+<div class="fuse-vertical-navigation-item-children" *ngIf="!isCollapsed" @expandCollapse>
+
+    <ng-container *ngFor="let item of item.children;trackBy: trackByFn">
+
+        <ng-container>
+
+
+            <ng-container *ngIf="item.children.length==0">
+                <fuse-vertical-navigation-basic-item [item]="item" [name]="name"></fuse-vertical-navigation-basic-item>
+            </ng-container>
+
+            <ng-container *ngIf="item.children.length>0">
+                <fuse-vertical-navigation-collapsable-item [item]="item" [name]="name" [autoCollapse]="autoCollapse">
+                </fuse-vertical-navigation-collapsable-item>
+            </ng-container>
+        </ng-container>
+
+    </ng-container>
+
+    
+
+</div>

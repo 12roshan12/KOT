@@ -1,0 +1,60 @@
+    <div mat-dialog-title class="flex flex-row justify-between">
+        <!-- <mat-progress-bar mode="indeterminate" [hidden]="stateService.isAsyncOperationRunning$ | async" style="top: -25px">
+        </mat-progress-bar> -->
+        <p *ngIf="activeLang == 'tr'" class="text-xl"  >{{ dialogData.dialogHeader }}</p> <p *ngIf="activeLang == 'en'" class="text-xl" >{{ dialogData.dialogEHeader }} </p>
+        <span (click)="closeDialog()" class="cursor-pointer" ><i class="fas fa-times"></i></span>
+    </div>
+
+    <div mat-dialog-content>
+        <ng-content class=""></ng-content>
+
+
+        <div class="flex flex-row mt-2 ">
+            <div class="w-1/4 flex items-center h-[36px]">
+              <mat-label> </mat-label>
+
+            </div>
+
+            <div class="w-3/4 flex flex-row">
+                <div class="form-check form-check-inline flex flex-row items-end m-2">
+                    <input (change)="selectedFormat($event)" name="format" class="form-check-input  appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" id="inlineRadio1"
+                        value="pdf" checked>
+                    <label class="form-check-label" for="inlineRadio1"><img class="w-12 h-12" src="assets/icons/pdfsvg.svg">
+                    </label>
+                </div>
+                <div class="form-check form-check-inline flex flex-row items-end m-2" *ngIf="roleadmin">
+                    <input (change)="selectedFormat($event)" name="format" class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" id="inlineRadio2"
+                        value="xlsx">
+                    <label class="form-check-label" for="inlineRadio2"><img class="w-12 h-12" src="assets/icons/excelsvg.svg"></label>
+                </div>
+                <div class="form-check form-check-inline flex flex-row items-end m-2" *ngIf="roleadmin">
+                    <input (change)="selectedFormat($event)" name="format" class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" id="inlineRadio3"
+                        value="docx">
+                    <label class="form-check-label" for="inlineRadio3"> <img class="w-12 h-12" src="assets/icons/wordsvg.svg"></label>
+                </div>
+            </div>
+
+          </div>
+
+
+
+    </div>
+
+    <div mat-dialog-actions class="justify-end" style="margin-bottom: 0px;">
+
+
+        <div mat-dialog-actions class="flex flex-row justify-end ">
+            <button mat-button (click)="handleDialogSubmit()" mat-raised-button class="rounded" color="primary"
+            [disabled] = serviceOngoing>
+                {{ dialogData.confirmButtonLabel }}
+            </button>
+            <button mat-button cdkFocusInitial class="rounded" (click)="closeDialog()"
+                [disabled]="stateService.isAsyncOperationRunning$ | async" mat-raised-button color="warn">
+                {{ dialogData.cancelButtonLabel }}
+            </button>
+            
+
+        </div>
+    </div>
+
+    <!-- [disabled]="stateService.isAsyncOperationRunning$ | async"> -->

@@ -1,0 +1,160 @@
+<div class="w-full">
+
+
+
+    <app-breadcrumbs [items]="['Menu']" [path]="'/dashboard'">
+    </app-breadcrumbs>
+
+    <div class="p-2  grid grid-cols-1 xl:grid-cols-1 gap-8 w-full">
+
+        <!-- Recent transactions table -->
+        <div *transloco="let t" class=" flex flex-col flex-auto bg-card shadow rounded  overflow-hidden">
+
+            <div class="px-5 mt-5">
+                <div style="display: inline-block;"
+                    class="  mr-30 text-lg font-medium tracking-tight leading-6 truncate">{{t('Menu List')}}</div>
+
+                <button routerLink="/security/menu/new" style="float: right;"
+                    class=" pull-right ml-2 mb-2 rounded-sm px-3 py-2 bg-blue-700 hover:bg-blue-500 text-white focus:shadow-outline focus:outline-none">
+                    New
+                </button>
+
+
+            </div>
+            <div class=" flex flex-row justify-end gap-2 mb-2 mr-5">
+                <mat-form-field class="justify-center" style="width: 20%;display: inline-block;">
+                    <input matInput #filter [(ngModel)]="queryAgency" placeholder="Search..." autocomplete="off"
+                        style="width: 100%">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+                <span class=" flex items-center border border-2 px-2 border-gray-300 rounded" style="height: 36px;">
+                    Per Page:
+                    <mat-select class="border-b border-gray-200 " [(value)]="size"
+                        (valueChange)="paginate(pageIndex)" style="width: 50px;margin-left: 15px">
+                        <mat-option [value]="5">5</mat-option>
+                        <mat-option [value]="10">10</mat-option>
+                        <mat-option [value]="20">20</mat-option>
+                        <mat-option [value]="50">50</mat-option>
+                 
+                    </mat-select>
+                </span>
+            </div>
+
+            <div class="overflow-x-auto ">
+                <table class="w-full bg-transparent mx-auto" mat-table matSort
+                    (matSortChange)="announceSortChange($event)"
+                    [dataSource]="menulist | searchFilter: queryAgency | paginate: { itemsPerPage: 5, currentPage: p , totalItems: mainlist?.length,id:'second' }"
+                    #recentTransactionsTable>
+
+                    <!-- Transaction ID -->
+
+                    <ng-container matColumnDef="ename">
+                        <th mat-header-cell mat-sort-header sortActionDescription="Sort by ename" *matHeaderCellDef>
+                            {{t('English Name')}}
+                        </th>
+                        <td mat-cell *matCellDef="let transaction">
+                            <span class="pr-6 whitespace-nowrap">
+                                {{transaction.ename}}
+                            </span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="nname">
+                        <th mat-header-cell mat-sort-header sortActionDescription="Sort by nname" *matHeaderCellDef>
+                            {{t('Nepali Name')}}
+                        </th>
+                        <td mat-cell *matCellDef="let transaction">
+                            <span class="pr-6 whitespace-nowrap">
+                                {{transaction.nname}}
+                            </span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="edescription">
+                        <th mat-header-cell mat-sort-header sortActionDescription="Sort by Description"
+                            *matHeaderCellDef>
+                            {{t('Description')}}
+                        </th>
+                        <td style="height:2px;" mat-cell *matCellDef="let transaction">
+                            <span class="pr-6   whitespace-nowrap">
+                                {{transaction.edescription}}
+                            </span>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="menuId">
+                        <th mat-header-cell mat-sort-header sortActionDescription="Sort by MenuId" *matHeaderCellDef>
+                            {{t('Menu')}}
+                        </th>
+                        <td style="height:2px;" mat-cell *matCellDef="let transaction">
+                            <span class="pr-6   whitespace-nowrap">
+                                {{transaction.menuId}}
+                            </span>
+                        </td>
+                    </ng-container>
+
+
+
+
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell sortActionDescription="Sort by actions" *matHeaderCellDef>
+                        </th>
+                        <td mat-cell *matCellDef="let transaction">
+                            <span class="font-medium whitespace-nowrap">
+                                <button class="text-blue p-1 m-1  " matTooltip="Edit"
+                                    routerLink="/security/menu/edit/{{transaction.menuId}}">
+                                    <mat-icon>edit </mat-icon>
+                                </button>
+
+                            </span>
+                        </td>
+
+                    </ng-container>
+                    <ng-container matColumnDef="actionss">
+                        <th mat-header-cell sortActionDescription="Sort by actionss" *matHeaderCellDef>
+                        </th>
+                        <td mat-cell *matCellDef="let transaction">
+                            <span class="font-medium whitespace-nowrap">
+                                <button class="text-blue p-1 m-1  " matTooltip="Delete"
+                                    (click)="delete(transaction.menuId)">
+                                    <mat-icon>delete </mat-icon>
+                                </button>
+
+                            </span>
+                        </td>
+
+                    </ng-container>
+                    <ng-container matColumnDef="recentOrdersTableFooter">
+
+                        <td class="py-6 px-10 border-0 justify-content-end" mat-footer-cell *matFooterCellDef
+                            colspan="12">
+
+
+
+                            <pagination-controls id="second" previousLabel="Prev." autoHide="true" responsive="true"
+                            (pageChange)="p = $event;paginate(p)" class="float-right" style="float: right;">
+                            </pagination-controls>
+                        
+
+                        </td>
+                    </ng-container>
+
+
+
+                    <tr mat-header-row *matHeaderRowDef="recentTransactionsTableColumns"></tr>
+                    <tr class="order-row " mat-row *matRowDef="let row; columns: recentTransactionsTableColumns;"></tr>
+                    <tr class="h-16 border-0" mat-footer-row *matFooterRowDef="['recentOrdersTableFooter']"></tr>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>

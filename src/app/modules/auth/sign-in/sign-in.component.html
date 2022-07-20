@@ -1,0 +1,262 @@
+<div *transloco="let t" class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0">
+
+  <div class="relative hidden md:flex flex-auto items-center justify-center w-1/2 h-full overflow-hidden dark:border-l">
+    <!-- Background - @formatter:off -->
+    <!-- Rings -->
+    <swiper *ngIf="mfmis" swiper-container class="!w-full !h-full" [slidesPerView]="1"
+      [autoplay]="{ delay:2500, disableOnInteraction: false }" [loop]="true" [spaceBetween]="50">
+      <ng-template swiperSlide class="!w-full !h-full" *ngFor="let s of slidesMfmis">
+
+        <img class="!w-full !h-full" [src]="s">
+
+      </ng-template>
+
+    </swiper>
+
+    <swiper *ngIf="!mfmis" swiper-container class="!w-full !h-full" [slidesPerView]="1"
+      [autoplay]="{ delay:2500, disableOnInteraction: false }" [loop]="true" [spaceBetween]="50">
+      <ng-template swiperSlide class="!w-full !h-full" *ngFor="let s of slidesFmis">
+
+        <img class="!w-full !h-full" [src]="s">
+
+      </ng-template>
+
+    </swiper>
+
+
+
+  </div>
+  <div
+    class="flex flex-col  w-full overflow-hidden sm:w-auto items-center md:h-full md:w-1/2   sm:rounded-2xl md:rounded-none  sm:bg-card">
+
+    <div class="relative right-0 mt-2  top-0 flex flex-0 items-center justify-between   w-full  z-49  border-b border-gray-200 dark:shadow-none  bg-card dark:bg-transparent print:hidden">
+
+      <div *ngIf="this.language == 'en'"  class="p-2">
+        <img class=" h-10  "  src="assets/images/fcgoen.png">
+      </div>
+
+      <div *ngIf="this.language == 'tr'" class="p-2">
+        <img class=" h-10  "  src="assets/images/fcgonp.png">
+      </div>
+
+
+      <div class="h-full mr-5 justify-between">
+      <languages></languages>
+      </div>
+
+    </div>
+
+
+    <div class="w-full flex-1 max-w-80 sm:w-80 mx-auto my-auto sm:mx-0 justify-center items-center">
+
+      <!-- Logo -->
+
+
+      <div class=" ">
+        <img class="object-fill h-25 w-80" src="{{bannerImage}}">
+      </div>
+
+      <!-- Title -->
+      <!-- <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Sign in</div> -->
+      <!-- <div class="flex items-baseline mt-0.5 font-medium">
+                <div>Don't have an account?</div>
+                <a
+                    class="ml-1 text-primary-500 hover:underline"
+                    [routerLink]="['/sign-up']">Sign up
+                </a>
+            </div> -->
+
+      <!-- Alert -->
+      <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
+        [@shake]="alert.type === 'error'">
+        {{alert.message}}
+      </fuse-alert>
+
+      <!-- Sign in form -->
+      <form  class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm" >
+
+        <!-- Email field -->
+        <mat-form-field  class="w-full">
+          <mat-label>{{ t('Username') }} </mat-label>
+          <input   matInput [formControlName]="'usernameOrEmail'" #formusername="matInput"  >
+          <mat-error *ngIf="signInForm.get('usernameOrEmail').hasError('required')">
+             {{ t('username is required') }}
+          </mat-error>
+          <mat-error *ngIf="signInForm.get('usernameOrEmail').hasError('usernameOrEmail')">
+             {{ t('Please enter a valid username') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Password field -->
+        <mat-form-field class="w-full">
+          <mat-label> {{ t('Password') }}</mat-label>
+          <input id="password" matInput type="password" [formControlName]="'password'" #passwordField>
+          <button mat-icon-button type="button"
+            (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+            matSuffix>
+            <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'password'" [svgIcon]="'heroicons_solid:eye'">
+            </mat-icon>
+            <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'text'" [svgIcon]="'heroicons_solid:eye-off'">
+            </mat-icon>
+          </button>
+          <mat-error>
+               {{ t('Password is required') }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width w-full">
+              <mat-label>  {{ t('Fiscal Year') }}</mat-label>
+              <mat-select *ngIf="this.language == 'en'"  formControlName="fiscalYear" (selectionChange)="selectfiscal($event)" >
+                <mat-option *ngFor="let fy of fiscalYears" [value]="fy.code" >
+                  {{fy.edescription}}
+                </mat-option>
+              </mat-select>
+
+              <mat-select *ngIf="this.language == 'tr'"  formControlName="fiscalYear" (selectionChange)="selectfiscal($event)" >
+                <mat-option *ngFor="let fy of fiscalYears" [value]="fy.code">
+                  {{fy.ndescription}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-icon matSuffix>list</mat-icon> -->
+            </mat-form-field>
+          <!-- {{signInForm.controls.fiscalYear.value}} -->
+
+
+          </div>
+        </div>
+        <!-- <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <!-- <ng-select formControlName="provinceId" (change)="selectministry($event)">
+                        <ng-option *ngFor="let fy of provinces"  [value]="fy.id">
+                          {{fy.edescription}}-{{fy.code}}</ng-option>
+                      </ng-select> -->
+
+        <!-- <mat-form-field class="example-full-width w-full" >
+                        <mat-label>Provinces</mat-label>
+                        <mat-select formControlName="provinceId" (selectionChange)="selectministry($event)">
+                          <mat-select-filter [array]="provinces" [displayMember]="'code'"  (filteredReturn)="filteredList1 =$event"></mat-select-filter>
+                          <mat-option *ngFor="let fy of filteredList1"  [value]="fy.id">
+                            {{fy.ndescription}}-{{fy.code}}
+                          </mat-option>
+                        </mat-select> -->
+        <!-- <mat-select formControlName="provinceId" (selectionChange)="selectministry($event)">
+                          <input matInput type="text" class="form-control" (keyup)="filterListCareUnit($event.target.value)">
+                          <mat-option *ngFor="let fy of filteredList1" [value]="fy.id">
+                            {{fy.edescription}}-{{fy.code}}
+                          </mat-option>
+                        </mat-select> -->
+        <!-- <mat-icon matSuffix>list</mat-icon>
+                      </mat-form-field> -->
+        <!--
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width w-full" >
+                        <mat-label>Ministry</mat-label>
+                        <mat-select formControlName="ministryId" (selectionChange)="selectdepartment($event)">
+                          <mat-select-filter [array]="ministries"  [displayMember]="'code'"  (filteredReturn)="filteredList2 =$event"></mat-select-filter>
+                          <mat-option *ngFor="let fy of filteredList2" [value]="fy.code">
+                            {{fy.ndescription}}-{{fy.code}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>list</mat-icon>
+                      </mat-form-field>
+
+                    </div> -->
+        <!-- </div> -->
+
+        <!-- <div class="row" *ngIf="f.userTypeId.value === 6">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width w-full" appearance="outline">
+                        <mat-label>Department</mat-label>
+                        <mat-select formControlName="departmentId">
+                          <mat-option *ngFor="let fy of department" [value]="fy.id">
+                            {{fy.ndescription}}-{{fy.code}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>list</mat-icon>
+                      </mat-form-field> -->
+
+        <!-- </div>
+                  </div> -->
+        <!-- Actions -->
+        <div class="inline-flex items-end justify-between w-full mt-1.5">
+          <mat-checkbox [color]="'primary'">
+              {{ t('Remember me') }}
+          </mat-checkbox>
+          <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">
+             {{ t('Forgot password') }}?
+          </a>
+        </div>
+
+        <!-- Submit button -->
+        <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
+          [disabled]="signInForm.disabled" (click)="signIn()">
+          <span *ngIf="!signInForm.disabled">
+             {{ t('Sign in') }}
+          </span>
+          <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+          </mat-progress-spinner>
+        </button>
+
+        <!-- Separator -->
+        <!-- <div class="flex items-center mt-8">
+                    <div class="flex-auto mt-px border-t"></div>
+                    <div class="mx-2 text-secondary">Or continue with</div>
+                    <div class="flex-auto mt-px border-t"></div>
+                </div> -->
+
+        <!-- Single sign-on buttons -->
+        <!-- <div class="flex items-center mt-8 space-x-4">
+                    <button
+                        class="flex-auto"
+                        type="button"
+                        mat-stroked-button>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'feather:facebook'"></mat-icon>
+                    </button>
+                    <button
+                        class="flex-auto"
+                        type="button"
+                        mat-stroked-button>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'feather:twitter'"></mat-icon>
+                    </button>
+                    <button
+                        class="flex-auto"
+                        type="button"
+                        mat-stroked-button>
+                        <mat-icon
+                            class="icon-size-5"
+                            [svgIcon]="'feather:github'"></mat-icon>
+                    </button>
+                </div> -->
+      </form>
+      <!-- <div class="py-2">
+            <p>
+              Don't have a account? <span class="text-primary font-bold" ><a routerLink="/sign-up" >Sign up</a></span>
+            </p>
+          </div> -->
+
+
+    </div>
+
+    <div class="relative right-0  bottom-0 flex flex-0 items-center justify-end w-full h-8  z-49 shadow dark:shadow-none dark:border-b bg-grey-400  print:hidden">
+
+        <span  class="col-6 pr-4 text-sm font-medium text-secondary text-right ">Developed By <a href="http://simplysoft.technology/" class="hover:underline italic text-blue-600" target="_blank">SimplySoft</a></span>
+    </div>
+
+
+
+
+  </div>
+  <div>
+
+  </div>
+
+</div>

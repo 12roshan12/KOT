@@ -1,0 +1,111 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/admin/dashboard/main">
+                                <i class="fas fa-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a routerLink="/sidebar-dashboard/101">
+                                Security</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a routerLink="/security/function/list" onClick="return false;">Functions</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Edit Function</h2>
+                        <span style="position: absolute;right: 9px;">
+                            <button routerLink="/security/function/list" mat-raised-button
+                                color="primary">Back</button>
+                        </span>
+                    </div>
+                    <div class="body">
+                        <form [formGroup]="functionform" class="m-4">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <input formControlName="name" matInput required>
+                                        <mat-error>
+                                            Name is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Description</mat-label>
+                                        <input matInput formControlName="description">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <mat-label>Status</mat-label>
+                                        <mat-select formControlName="status" required>
+                                            <mat-option [value]="1">
+                                                Active
+                                            </mat-option>
+                                            <mat-option [value]="0">
+                                                Inactive
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Status is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="mb-2">
+                                    <button mat-button class="right" (click)="addNew()"
+                                        style="padding: 5px;float: right; " class="btn btn-primary">
+                                        <i class="fa fa-plus-circle"></i>
+                                        New Entity
+                                    </button>
+                                </div>
+                                <mat-expansion-panel class="mb-1" *ngFor="let data of selectedList; let i = index">
+                                    <mat-expansion-panel-header >
+                                        <mat-panel-title>
+                                            {{data.moduleName}}
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div class="row">
+                                        <div *ngFor="let check of data.entity" class="col-3">
+                                            <section  class="example-section">
+                                                <mat-checkbox [checked]="check.checked" (change)="onCheck(check, $event)"
+                                                    value="{{ check.entityId }}" class="example-margin">{{check.name }}
+                                                </mat-checkbox>
+                                            </section>
+                                        </div>
+                                    </div>
+                                   
+                                </mat-expansion-panel>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <button class="mr-3" (click)="Submit()" mat-raised-button
+                                        color="primary">Update</button>
+                                    <button type="button" mat-button>Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

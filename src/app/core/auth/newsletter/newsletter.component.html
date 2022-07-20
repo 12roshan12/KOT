@@ -1,0 +1,43 @@
+
+
+    <div class="flex justify-end ">
+
+        <div>
+            <mat-icon aria-hidden="false" (click)="close()">close</mat-icon>
+
+        </div>
+    </div>
+
+
+    <div mat-dialog-content class="">
+
+        <div>
+       
+            <div *ngFor="let data of displayData" class="mt-2 p-2  rounded-lg w-full">
+
+
+                <div>
+                    <span class=" text-xl font-bold underline" [innerHtml]="data.ntitle"></span>
+
+                </div>
+                <div>
+                    <span class=" " [innerHtml]="data.ndescription | safeHtml"></span>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+    <div mat-dialog-actions class="justify-end  ">
+        <button mat-flat-button color="warn" (click)="close()" cdkFocusInitial>Close</button>
+    </div>

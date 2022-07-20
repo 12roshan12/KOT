@@ -1,0 +1,197 @@
+
+
+<div class="w-full">
+
+
+    <div class="mt-2  mx-auto text-3xl font-bold mx-3">Add User</div>
+
+    <div class=" my-4 mx-4">
+        <div class="container-fluid  ">
+
+            <div class="flex flex-col flex-auto min-w-0">
+                <div class="font-sans antialiased ">
+
+                    <div class="w-full bg-white shadow">
+                        <div class="container p-2">
+                        
+                            <form [formGroup]="userForm" class="m-4">
+                                <div class="w-full row grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 xl:grid-cols-2">
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label >Username</mat-label>
+                                            <input formControlName="username" matInput required>
+                                            <mat-error>
+                                                Username is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Full Name</mat-label>
+                                            <input matInput required formControlName="name">
+                                            <mat-error>
+                                                Fullname is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Email</mat-label>
+                                            <input matInput required formControlName="email">
+                                            <mat-error
+                                                *ngIf="userFormControl.email.errors?.required || userFormControl.email.touched">
+                                                Please enter a valid email address
+                                            </mat-error>
+                                            <mat-error>
+                                                Email is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>MobileNo</mat-label>
+                                            <input matInput required formControlName="mobile">
+                                            <mat-error
+                                                *ngIf="userFormControl.mobile.errors?.required && userFormControl.mobile.invalid">
+                                                MobileNo is required
+                                            </mat-error>
+                                            <mat-error
+                                                *ngIf="userFormControl.mobile.touched && userFormControl.mobile.errors?.pattern">
+                                                Please, Enter 10 digit Mobile Number.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Password</mat-label>
+                                            <input matInput required formControlName="password" [type]="hide ? 'password' : 'text'">
+                                            <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                          </a>
+                                            <mat-error *ngIf="userFormControl.password.invalid">
+                                                password is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Confirm Password</mat-label>
+                                            <input matInput required formControlName="conformPassword" [type]="hide ? 'password' : 'text'">
+                                            <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                          </a>
+                                            <mat-error
+                                                *ngIf="userFormControl.conformPassword.touched && userFormControl.conformPassword.errors?.passwordMismatch">
+                                                Password Mismatch
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>User Type</mat-label>
+                                            <mat-select (selectionChange)="usertype($event)" formControlName="userTypeId" required>
+                                                <mat-option *ngFor="let data of userTypeList" [value]="data.id">
+                                                    {{data.edescription}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                UserType is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Role</mat-label>
+                                            <mat-select formControlName="roles" required  multiple>
+                                                <mat-option *ngFor="let data of roleList" [value]="data">
+                                                    {{data.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                Role is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div *ngIf="usertypeId != 1" class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Province</mat-label>
+                                            <mat-select formControlName="provinceId" required (selectionChange)="selectministry($event)">
+                                                <mat-option *ngFor="let data of provinces" [value]="data.code">
+                                                    {{data.ndescription}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                Province is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div *ngIf="usertypeId== 5" class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Ministry</mat-label>
+                                            <mat-select formControlName="ministryId" required>
+                                                <mat-option *ngFor="let data of ministries" [value]="data.code">
+                                                    {{data.code}}-{{data.ndescription}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                Ministry is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="p-1">
+                                        <mat-form-field class="w-full mb-3" appearance="fill">
+                                            <mat-label>Status</mat-label>
+                                            <mat-select formControlName="status" required>
+                                                <mat-option [value]="1">
+                                                    Active
+                                                </mat-option>
+                                                <mat-option [value]="0">
+                                                    Inactive
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                Status is required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+    
+                                </div>
+                             
+                            </form>
+                        
+
+                            <div class="w-full lg:w-full py-4  my-2 ">
+                                <div class="font-sans antialiased  mx-3">
+
+
+                                    <div class=" flex mt-5 justify-end bg-grey-lightest py-2 px-1 ">
+
+                                        <div class="flex flex-row justify-end ">
+                                            <button
+                                                class="ml-2 mt-2 rounded-sm px-3 py-2 bg-red-700 hover:bg-red-500 text-white focus:shadow-outline focus:outline-none"
+                                                routerLink="/security/user/list">
+                                                Cancel
+                                            </button>
+                                            <button
+                                                class="ml-2 mt-2 rounded-sm px-3 py-2 bg-blue-700 hover:bg-blue-500 text-white focus:shadow-outline focus:outline-none"
+                                                (click)="Submit()">
+                                                Submit
+                                            </button>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

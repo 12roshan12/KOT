@@ -1,0 +1,125 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+@import '~ngx-toastr/toastr';
+np-datepicker input{
+    width:100%;
+}
+
+input,textarea{
+    max-width: -webkit-fill-available ;
+   
+} 
+.mat-button, .mat-flat-button, .mat-raised-button, .mat-stroked-button {
+    border-radius: 6px !important;
+}
+.ql-toolbar.ql-snow{
+background: white;
+} 
+
+.ql-container .ql-editor{
+    max-height: none !important ;
+    height: fit-content;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {padding: 6px !important;height: 40px;padding-top: 6px;}
+.mat-dialog-container {
+   
+ 
+    overflow: hidden !important;
+  
+    // width: 600px !important;
+    height: fit-content !important;
+    border: 1px solid #888 !important;
+    border-radius: 0 !important;
+    /* min-height: inherit; */
+    /* max-height: inherit; */
+}
+.mat-filter{
+    padding: 10px !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-infix .mat-form-field-label-wrapper {
+    margin: -10px;
+    margin-left: 0px;
+}
+
+li {
+    font-size: 14px;
+    margin-left: 10px;
+    list-style-type: circle;
+ }
+
+ h1 {
+     font-size: 32pt;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 26pt;
+   font-weight: bold;
+}
+
+h3 {
+    font-size: 22pt;
+   font-weight: bold;
+}
+
+h4 {
+    font-size: 18pt;
+   font-weight: bold;
+}
+
+h5 {
+    font-size: 14pt;
+   font-weight: bold;
+}
+
+.apexcharts-menu{
+    display: none;
+}
+
+
+.mat-form-field-infix{
+    width: 60px !important;
+    margin-left: 10px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 3px;
+}
+.mat-form-field-wrapper {
+
+    padding-bottom: 0px !important;
+}
+
+.mat-menu-item .voucherMenu{
+    padding: 0px !important;
+}
+
+.mat-sort-header-content{
+    min-width: 55px;
+}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type{
+    padding-right: 0px !important;
+}
+
+button.JVPrint{
+    padding-left: 0px !important;
+    padding-right: 6px !important;
+}
+
+.mat-form-field-infix {
+    border: none !important;
+    border-radius: none !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex{
+    padding-top: 10px !important;
+    height: 36px !important;
+}
+

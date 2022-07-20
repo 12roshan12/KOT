@@ -1,0 +1,218 @@
+<div class="w-full">
+
+
+    <div class="mt-2  mx-auto text-3xl font-bold mx-3">Add Function</div>
+
+    <div class=" my-4 mx-4">
+        <div class="container-fluid  ">
+
+            <div class="flex flex-col flex-auto min-w-0">
+                <div class="font-sans antialiased ">
+
+                    <div class="w-full bg-white shadow">
+                        <div class="container p-2">
+                            <div class="container-fluid my-2 p-2">
+                                <form *transloco="let t" [formGroup]="roleform" #RoleNgForm="ngForm">
+                                    <ng-container>
+                                        <div class="grid grid-cols-2 gap-x-5 ">
+
+                                            <div class="flex flex-row ">
+                                                <div class="w-1/4 flex items-center h-[36px]">
+                                                    <mat-label> {{t('Role Name') }}: </mat-label>
+
+                                                </div>
+
+                                                <div class="w-3/4">
+                                                    <mat-form-field class="w-full" appearance="fill">
+                                                        <input formControlName="roleName" matInput required>
+                                                        <mat-error>
+                                                            Role Name is required
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="flex flex-row ">
+                                                <div class="w-1/4 flex items-center h-[36px]">
+                                                    <mat-label> {{ t('User Type') }}: </mat-label>
+
+                                                </div>
+
+                                                <div class="w-3/4">
+                                                    <mat-form-field class="w-full" appearance="fill">
+                                                        <mat-select formControlName="userTypeId" required>
+                                                            <mat-option *ngFor="let data of RoleTypeList" [value]="data.id">
+                                                                {{data.edescription}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <mat-error>
+                                                            UserType is required
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+                                          
+                                            
+                                            
+                                          
+                                            <div class="flex flex-row ">
+                                                <div class="w-1/4 flex items-center h-[36px]">
+                                                    <mat-label> {{t('Status') }}: </mat-label>
+
+                                                </div>
+
+                                                <div class="w-3/4">
+                                                    <mat-form-field class="w-full" appearance="fill">
+                                                        <mat-select formControlName="status" required>
+                                                            <mat-option [value]="1">
+                                                                Active
+                                                            </mat-option>
+                                                            <mat-option [value]="0">
+                                                                Inactive
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <mat-error>
+                                                            Status is required
+                                                        </mat-error>
+
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <div class="row">
+
+                                            <mat-tab-group>
+                                                <mat-tab label="Modules">
+                                                    <div class="row">
+                                                        <div *ngFor="let mod of modSelectedList" class="col-3">
+                                                            <section class="example-section">
+                                                                <mat-checkbox (change)="onCheckModules(mod, $event)"
+                                                                    value="{{ mod.id }}" [checked]="mod.checked"
+                                                                    class="example-margin">{{mod.name }}
+                                                                </mat-checkbox>
+                                                            </section>
+                                                        </div>
+                                                    </div>
+                                                </mat-tab>
+                                                <mat-tab label="Menus">
+                                                    <mat-expansion-panel class="mb-1"
+                                                        *ngFor="let data of modSelectedList; let i = index">
+                                                        <mat-expansion-panel-header>
+                                                            <mat-panel-title>
+                                                                {{data.name}}
+                                                            </mat-panel-title>
+                                                        </mat-expansion-panel-header>
+                                                        <div class="row">
+                                                            <div *ngFor="let check of selectedList" class="col-3">
+                                                                <section  *ngIf="data.moduleId == check.moduleId" class="example-section">
+                                                                    <mat-checkbox [checked]="check.checked"
+                                                                        (change)="onCheck(check, $event)" value="{{ check.menuId }}"
+                                                                        class="example-margin">
+                                                                        {{check.menuNDesc}}
+                                                                    </mat-checkbox>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+            
+                                                    </mat-expansion-panel>
+                                                </mat-tab>
+                                                <mat-tab label="Permissions">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Function</th>
+                                                                <th>Access Level Type</th>
+                                                                <th><button (click)="addNewPermissions()" class="btn btn-primary btn-circle">
+                                                                    <i class="fa fa-plus-circle"></i>
+                                                                </button></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr *ngFor="let data of roleModel.functionInRole; let rolInd = index">
+                                                            <td style="width:500px;">
+                                                                <mat-select  (change)="checkDuplicate($event)" formControlName="status" required>
+                                                                    <mat-option *ngFor="let item of functions" [value]="item.id">
+                                                                        {{item.name}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </td>
+                                                            <td style="width:500px;">
+                                                                <label class="col-sm-2" *ngFor="let access of data.accessLevel; let ind= index">
+                                                                    <label class="checkbox" >
+                                                                         <input type="checkbox" value="{{access.value}}" #checkedIdAcess
+                                                                                [disabled]="ind ==0"
+                                                                                (change)="checkAccessLevel(ind, rolInd,checkedIdAcess.checked)"
+                                                                              [checked]="access.value == 1? true: false"><i></i>
+                                                                        {{access.formalName}}
+                                                                    </label>
+                                                                </label>
+            
+                                                                <!--<label class="select" style="width: 300px">-->
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <!--<ng-select-->
+                                                                            <!--(change)="checkDuplicate($event)"-->
+                                                                            <!--[items]="accessLevel"-->
+                                                                            <!--bindValue="id"-->
+                                                                            <!--bindLabel="formalName"-->
+                                                                            <!--[(ngModel)]="data.accessLevelTypeId"-->
+                                                                            <!--name="accesslevel{{data.accessLevelTypeId}}"></ng-select>-->
+                                                                <!--</label>-->
+                                                            </td>
+                                                            <td> <button (click)="removeItem(rolInd)" class="btn btn-danger btn-circle">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </mat-tab>
+                                            </mat-tab-group>
+            
+                                        </div>
+                                    </ng-container>
+
+
+                                </form>
+                            </div>
+
+                            <div class="w-full lg:w-full py-4  my-2 ">
+                                <div class="font-sans antialiased  mx-3">
+
+
+                                    <div class=" flex mt-5 justify-end bg-grey-lightest py-2 px-1 ">
+
+                                        <div class="flex flex-row justify-end ">
+                                            <button
+                                                class="ml-2 mt-2 rounded-sm px-3 py-2 bg-red-700 hover:bg-red-500 text-white focus:shadow-outline focus:outline-none"
+                                                (click)="Cancel()">
+                                                Cancel
+                                            </button>
+                                            <button
+                                                class="ml-2 mt-2 rounded-sm px-3 py-2 bg-blue-700 hover:bg-blue-500 text-white focus:shadow-outline focus:outline-none"
+                                                (click)="Submit()">
+                                                Submit
+                                            </button>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
