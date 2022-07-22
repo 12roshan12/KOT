@@ -17,9 +17,15 @@
             <ng-content select="[fuseVerticalNavigationContentHeader]"></ng-content>
         </div>
 
+        <ng-container *ngFor="let data of navigationList" class="flex flex-row p-2 m-2">
+            <a class=" flex justify-start items-center border-b cursor-pointer rounded hover:bg-gray-50/30 p-2 px-4 m-2" (click)="route(data)" >
+               {{data.name}}
+            </a>
+        </ng-container>
+
         <!-- Items -->
         <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
-
+            
             <!-- Skip the hidden items -->
             <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
 
@@ -35,19 +41,19 @@
                 </ng-container>
 
                 <!-- Basic -->
-                <ng-container *ngIf="item.children.length==0">
+                <!-- <ng-container *ngIf="item.children.length==0">
                     <fuse-vertical-navigation-basic-item
                         [item]="item"
                         [name]="name"></fuse-vertical-navigation-basic-item>
-                </ng-container>
+                </ng-container> -->
 
                 <!-- Collapsable -->
-                <ng-container  *ngIf="item.children.length>0" >
+                <!-- <ng-container  *ngIf="item.children.length>0" >
                     <fuse-vertical-navigation-collapsable-item
                         [item]="item"
                         [name]="name"
                         [autoCollapse]="autoCollapse"></fuse-vertical-navigation-collapsable-item>
-                </ng-container>
+                </ng-container> -->
 
                 <!-- Divider -->
                 <ng-container *ngIf="item.type === 'divider'">

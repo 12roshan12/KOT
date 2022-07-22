@@ -5,6 +5,12 @@ import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { SettingsComponent } from './layout/common/settings/settings.component';
 import { NotFoundComponentComponent } from './shared/component/not-found-component/not-found-component.component';
+import { KOTComponent } from './modules/admin/pages/kot/kot.component';
+import { OrderComponent } from './modules/admin/pages/orders/orders.component';
+import { BillComponent } from './modules/admin/pages/bill/bill.component';
+import { SettingComponent } from './modules/admin/pages/settings/settings.component';
+import { ReportComponent } from './modules/admin/pages/reports/reports.component';
+import { InventoryComponent } from './modules/admin/pages/inventory/inventory.component';
 
 
 
@@ -72,8 +78,8 @@ export const appRoutes: Route[] = [
     // Admin routes
     {
         path: '',
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
         component: LayoutComponent,
         resolve: {
             initialData: InitialDataResolver,
@@ -81,19 +87,15 @@ export const appRoutes: Route[] = [
         children: [
             { path: 'dashboard', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule) },
             { path: 'profile', loadChildren: () => import('app/layout/common/user/user.module').then(m => m.UserModule) },
-            {
-                path: "security",
-
-                loadChildren: () =>
-                    import('app/modules/admin/security/security.module').then(
-                        (m) => m.SecurityModule
-                    ),
-            },
+            { path: "security",loadChildren: () => import('app/modules/admin/security/security.module').then((m) => m.SecurityModule),},
             { path: 'setting', component: SettingsComponent },
-            { path: '**', component: NotFoundComponentComponent }
-
-
-
+            { path: 'kot', component: KOTComponent },
+            { path: 'orders', component: OrderComponent },
+            { path: 'bill', component: BillComponent },
+            { path: 'setting', component: SettingComponent },
+            { path: 'reports', component: ReportComponent },
+            { path: 'inventory', component: InventoryComponent },
+            { path: '**', component: NotFoundComponentComponent },
         ]
     }
 ];

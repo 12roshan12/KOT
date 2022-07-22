@@ -59,6 +59,16 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
     itemsMenu: any;
     menulist: any;
     updateList: any;
+    navigationList = [
+        {name:'Dashboard',url:'/dashboard'},
+        {name:'KOT',url:'/kot'},
+        {name:'Orders',url:'/orders'},
+        {name:'Bill',url:'/bill'},
+        {name:'Setting',url:'/setting'},
+        {name:'Reports',url:'/reports'},
+        {name:'Inventory',url:'/inventory'},
+    ]
+
 
     /**
      * Constructor
@@ -74,9 +84,9 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
         private _fuseUtilsService: FuseUtilsService
     ) {
 
-        const update = JSON.parse((sessionStorage.getItem('syncStatus')?sessionStorage.getItem('syncStatus'):''))
-        this.updateList = update[0].updatedOn
-        console.log(this.updateList);      
+        // const update = JSON.parse((sessionStorage.getItem('syncStatus')?sessionStorage.getItem('syncStatus'):''))
+        // this.updateList = update[0].updatedOn
+        // console.log(this.updateList);      
         // this.updateList = moment().format('MMMM Do YYYY, h:mm:ss a');
         // console.log(this.updateList);
 
@@ -307,26 +317,9 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
                     this.closeAside();
                 }
             });
-        var menu = JSON.parse(sessionStorage.getItem('modules') || '{}');
-        var menusideitem = JSON.parse(sessionStorage.getItem('items') || '{}');
-        this.itemsMenu = menusideitem;
-        // if (menu) {
-        this.menulist = menu;
-        this.menulist.sort((a, b) => a.sortBy - b.sortBy);
-        for(let i=0;i<this.menulist.length;i++){
-            this.menulist[i].children.sort((a,b)=>a.sortBy - b.sortBy);
-        }
-        this.navigation = this.menulist;
-        for (let i = 0; i > this.menulist.length; i++) {
-            // this.navigation = this.menulist[i];
-        }
-        this.menulist.forEach((element, index) => {
-           
 
-        });
-        
 
-        console.log(this.navigation)
+
     }
 
     /**
@@ -706,5 +699,10 @@ export class FuseVerticalNavigationComponent implements OnChanges, OnInit, After
 
         // Execute the observable
         this.openedChanged.next(open);
+    }
+
+    route(e:any){
+        console.log(e);
+        this._router.navigate([`${e.url}`])
     }
 }

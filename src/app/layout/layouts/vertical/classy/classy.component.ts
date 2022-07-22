@@ -86,68 +86,6 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             // this._updateNavigation(activeLang);
         });
 
-        const tempa = (sessionStorage.getItem('username')?sessionStorage.getItem('username'):'');
-        // console.log(tempa);
-        // tempa = tempa?.substring(1, tempa.length-1);
-        this.user = tempa;
-         let Role = JSON.parse(sessionStorage.getItem('roles'));
-         this.Role = Role[0]
-         let User = JSON.parse(sessionStorage.getItem('user'));
-         var provinceId = User.provinceId;
-         var ministryId = User.ministryId;
-         var departmentId = User.departmentId
-         console.log(departmentId)
-         const formObject = <any>{};
-         formObject.budYear = sessionStorage.getItem('fiscalYear');
-         this._authService.getProvince(formObject).subscribe(data => {
-             var provinceList = data.data.provinces
-             this.provinceName = provinceList.filter((e: any) => {
-                 if (provinceId == -1) {
-                     return e.code == 0
-                 }
-                 else {
-                     return e.code == provinceId
-                 }
-             })
-            console.log(this.provinceName)
-             this.provinceName = this.provinceName[0]
- 
-         })
-         formObject.provinceId = provinceId == -1 ? 0 : provinceId
-
-         this._authService.getMinistry(formObject).subscribe(data => {
-            var ministryList = data.data.ministries
-            this.ministryName = ministryList.filter((e:any)=>{
-                return e.code == ministryId
-            })
-            console.log(this.ministryName)
-            this.ministryName = this.ministryName[0]
-         })
-
-         formObject.ministryId = ministryId
-         formObject.districtId = 0;
-         formObject.departmentId = 0; 
-         this._authService.getDepartment(formObject).subscribe(data => {
-             var departmentList = data.data.departmetns
-             console.log(departmentList)
-            this.departmentName = departmentList.filter((e:any)=>{
-                return e.code == departmentId
-            })
-            console.log(this.departmentName)
-            this.departmentName = this.departmentName[0]
-
-         })
-         var fiscalYear = sessionStorage.getItem('fiscalYear')
-
-         this._authService.getFiscalYears().subscribe((data) => {
-            var fiscalYearList = data.data.budYears;
-            this.fiscalYeardata = fiscalYearList.filter((e:any)=>{
-                return e.code == fiscalYear 
-            })
-            this.fiscalYeardata = this.fiscalYeardata[0]
-         })
-        
-        
 
 
 

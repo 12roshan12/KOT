@@ -18,6 +18,19 @@ import { NgIdleModule } from "@ng-idle/core";
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NotFoundComponentComponent } from './shared/component/not-found-component/not-found-component.component';
+import { BillComponent } from './modules/admin/pages/bill/bill.component';
+import { InventoryComponent } from './modules/admin/pages/inventory/inventory.component';
+import { KOTComponent } from './modules/admin/pages/kot/kot.component';
+import { OrderComponent } from './modules/admin/pages/orders/orders.component';
+import { CategoryComponent } from './modules/admin/pages/settings/category/category.component';
+import { CustomerComponent } from './modules/admin/pages/settings/customer/customer.component';
+import { HallComponent } from './modules/admin/pages/settings/hall/hall.component';
+import { MenuComponent } from './modules/admin/pages/settings/menu/menu.component';
+import { StaffComponent } from './modules/admin/pages/settings/staff/staff.component';
+import { StatusComponent } from './modules/admin/pages/settings/status/status.component';
+import { TableComponent } from './modules/admin/pages/settings/table/table.component';
+import { TypeComponent } from './modules/admin/pages/settings/type/type.component';
+import { SettingComponent } from './modules/admin/pages/settings/settings.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -27,9 +40,20 @@ const routerConfig: ExtraOptions = {
 @NgModule({
     declarations: [
         AppComponent,
+        BillComponent,
+        InventoryComponent,
+        KOTComponent,
+        OrderComponent,
+        CategoryComponent,
+        CustomerComponent,
+        HallComponent,
+        MenuComponent,
+        StaffComponent,
+        StatusComponent,
+        TableComponent,
+        TypeComponent,
+        SettingComponent,
         NotFoundComponentComponent,
-      
-        
     ],
     imports     : [
         BrowserModule,
