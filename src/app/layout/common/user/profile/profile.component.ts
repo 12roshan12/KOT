@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.username = sessionStorage.getItem('username');
     this.user = JSON.parse(sessionStorage.getItem('user'));
-    this.Roles = this.user.roles[0];
+    // this.Roles = this.user.roles[0];
 
   }
 
