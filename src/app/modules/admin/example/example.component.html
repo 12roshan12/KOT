@@ -1,59 +1,100 @@
-<div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-4 w-full p-4">
+<div>
 
-    <div class="flex flex-col  px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg  w-full ">
-        <div class="flex justify-end items-center">
-            Icon
-        </div>
-        <div class="flex justify-start items-center">
-            <div>
-                Today Orders
+    <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-4 w-full p-4">
+
+        <div
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            <div class="flex flex-1 justify-between items-center ">
+                <div class="flex flex-row gap-x-2 items-center">
+                    <span><img src="assets/images/kotImages/up-arrow.png" class="w-6 h-6" /></span> <span
+                        class="text-white font-bold">+10%</span>
+
+                </div>
+                <div class="rounded-full  bg-white flex justify-center items-center">
+                    <img src="assets/images/kotImages/team.png" class="w-16 h-16" />
+                </div>
             </div>
-            <div>
-                50
+            <div class="flex flex-0 justify-between items-bottom font-bold  ">
+                <div class="text-white text-xl">
+                    Happy Client
+                </div>
+                <div class="text-white text-3xl font-serif flex justify-end">
+                    50
+                </div>
             </div>
         </div>
+
+        <div
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            <div class="flex flex-1 justify-between items-center ">
+                <div class="flex flex-row gap-x-2 items-center">
+                    <span><img src="assets/images/kotImages/alert.png" class="w-6 h-6" /></span> <span
+                        class="text-red font-bold">-10%</span>
+
+                </div>
+                <div class="rounded-full  bg-white flex justify-center items-center">
+                    <img src="assets/images/kotImages/order-food.png" class="w-16 h-16" />
+                </div>
+            </div>
+            <div class="flex flex-0 justify-between items-bottom font-bold  ">
+                <div class="text-white text-xl">
+                    Order Completed
+                </div>
+                <div class="text-white text-3xl font-serif flex justify-end">
+                    50
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            <div class="flex flex-1 justify-between items-center ">
+                <div class="flex flex-row gap-x-2 items-center">
+                    <span><img src="assets/images/kotImages/up-arrow.png" class="w-6 h-6" /></span> <span
+                        class="text-white font-bold">+10%</span>
+
+                </div>
+                <div class="rounded-full  bg-white flex justify-center items-center">
+                    <img src="assets/images/kotImages/money.png" class="w-16 h-16" />
+                </div>
+            </div>
+            <div class="flex flex-0 justify-between items-bottom font-bold  ">
+                <div class="text-white text-xl">
+                    Revenue Generated
+                </div>
+                <div class="text-white text-3xl font-serif flex justify-end">
+                    50
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            <div class="flex flex-1 flex-row justify-between items-center ">
+                <div class="text-white text-xl font-bold">
+                    Customer Rating
+                </div>
+                <div class="rounded-full  bg-white flex justify-center items-center">
+                    <img src="assets/images/kotImages/5-stars.png" class="w-16 h-16" />
+                </div>
+            </div>
+            <div class="flex flex-0 justify-center items-bottom font-bold w-full ">
+                <div class="text-white text-3xl font-serif flex flex-row justify-end">
+                    <span *ngFor="let n of numSequence(5);let i = index;">
+                        <mat-icon class="text-yellow-400 text-4xl mx-2">star</mat-icon>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
-    <div class="flex flex-col px-8 py-4 bg-white rounded-lg  w-full">
-        <div class="flex justify-end">
-            Icon
-        </div>
-        <div class="flex justify-start">
-            <div>
-                Today Orders
-            </div>
-            <div>
-                50
-            </div>
-        </div>
-    </div>
-
-    <div class="flex flex-col px-8 py-4 bg-white rounded-lg  w-full">
-        <div class="flex justify-end">
-            Icon
-        </div>
-        <div class="flex justify-start">
-            <div>
-                Today Orders
-            </div>
-            <div>
-                50
-            </div>
-        </div>
-    </div>
-
-    <div class="flex flex-col px-8 py-4 bg-white rounded-lg  w-full">
-        <div class="flex justify-end">
-            Icon
-        </div>
-        <div class="flex justify-start">
-            <div>
-                Today Orders
-            </div>
-            <div>
-                50
-            </div>
-        </div>
+    <div id="chart">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+            [fill]="chartOptions.fill" [stroke]="chartOptions.stroke" [responsive]="chartOptions.responsive">
+        </apx-chart>
     </div>
 
 </div>
