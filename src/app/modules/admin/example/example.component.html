@@ -1,9 +1,22 @@
-<div>
+<div class="w-full bg-white">
+    <div class=" px-4 grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-4 w-full ">
+        <div class="col-start-4 md:col-start-4 sm:col-start-2 xl:col-start-4 flex flex-row  gap-x-2 "> 
+            <span class="flex items-center pb-3">Filter&nbsp;Page&nbsp;By:</span>       
+            <mat-form-field class=" w-full   py-2" appearance="fill">
+                <mat-select placeholder="Filter By:">
+                    <mat-option value="1">Daily</mat-option>
+                    <mat-option value="2">weakly</mat-option>
+                    <mat-option value="3">Yearly</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-4 w-full p-4">
+    <div
+        class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-x-4 gap-y-2 w-full px-4 ">
 
         <div
-            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full shadow-lg">
             <div class="flex flex-1 justify-between items-center ">
                 <div class="flex flex-row gap-x-2 items-center">
                     <span><img src="assets/images/kotImages/up-arrow.png" class="w-6 h-6" /></span> <span
@@ -14,18 +27,34 @@
                     <img src="assets/images/kotImages/team.png" class="w-16 h-16" />
                 </div>
             </div>
-            <div class="flex flex-0 justify-between items-bottom font-bold  ">
+            <div class="flex flex-0 flex-col  items-bottom font-bold  ">
                 <div class="text-white text-xl">
                     Happy Client
                 </div>
                 <div class="text-white text-3xl font-serif flex justify-end">
-                    50
+                    <span class="flex justify-end">50</span>
                 </div>
+                <!-- <div class="w-full">
+                    <div id="chart">
+                        <apx-chart
+                          [series]="chartOptions1.series"
+                          [chart]="chartOptions1.chart"
+                          [xaxis]="chartOptions1.xaxis"
+                          [dataLabels]="chartOptions1.dataLabels"
+                          [grid]="chartOptions1.grid"
+                          [stroke]="chartOptions1.stroke"
+                          [title]="chartOptions1.title"
+                          [markers]="chartOptions1.markers"
+                          [yaxis]="chartOptions1.yaxis"
+                          [fill]="chartOptions1.fill"
+                        ></apx-chart>
+                      </div>
+                </div> -->
             </div>
         </div>
 
         <div
-            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full shadow-lg">
             <div class="flex flex-1 justify-between items-center ">
                 <div class="flex flex-row gap-x-2 items-center">
                     <span><img src="assets/images/kotImages/alert.png" class="w-6 h-6" /></span> <span
@@ -36,18 +65,34 @@
                     <img src="assets/images/kotImages/order-food.png" class="w-16 h-16" />
                 </div>
             </div>
-            <div class="flex flex-0 justify-between items-bottom font-bold  ">
+            <div class="flex flex-0 flex-col items-bottom font-bold  ">
                 <div class="text-white text-xl">
                     Order Completed
                 </div>
                 <div class="text-white text-3xl font-serif flex justify-end">
-                    50
+                    <span class="flex justify-end">50</span>
                 </div>
+                <!-- <div class="w-full">
+                    <div id="chart">
+                        <apx-chart
+                          [series]="chartOptions2.series"
+                          [chart]="chartOptions2.chart"
+                          [xaxis]="chartOptions2.xaxis"
+                          [dataLabels]="chartOptions2.dataLabels"
+                          [grid]="chartOptions2.grid"
+                          [stroke]="chartOptions2.stroke"
+                          [title]="chartOptions2.title"
+                          [markers]="chartOptions2.markers"
+                          [yaxis]="chartOptions2.yaxis"
+                          [fill]="chartOptions2.fill"
+                        ></apx-chart>
+                      </div>
+                </div> -->
             </div>
         </div>
 
         <div
-            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full shadow-lg">
             <div class="flex flex-1 justify-between items-center ">
                 <div class="flex flex-row gap-x-2 items-center">
                     <span><img src="assets/images/kotImages/up-arrow.png" class="w-6 h-6" /></span> <span
@@ -58,18 +103,35 @@
                     <img src="assets/images/kotImages/money.png" class="w-16 h-16" />
                 </div>
             </div>
-            <div class="flex flex-0 justify-between items-bottom font-bold  ">
+            <div class="flex flex-0 flex-col items-bottom font-bold  ">
                 <div class="text-white text-xl">
                     Revenue Generated
                 </div>
                 <div class="text-white text-3xl font-serif flex justify-end">
-                    50
+                    <span class="flex justify-end">RS. 50</span>
                 </div>
+
+                <!-- <div class="w-full">
+                    <div id="chart">
+                        <apx-chart
+                          [series]="chartOptions3.series"
+                          [chart]="chartOptions3.chart"
+                          [xaxis]="chartOptions3.xaxis"
+                          [dataLabels]="chartOptions3.dataLabels"
+                          [grid]="chartOptions3.grid"
+                          [stroke]="chartOptions3.stroke"
+                          [title]="chartOptions3.title"
+                          [markers]="chartOptions3.markers"
+                          [yaxis]="chartOptions3.yaxis"
+                          [fill]="chartOptions3.fill"
+                        ></apx-chart>
+                      </div>
+                </div> -->
             </div>
         </div>
 
         <div
-            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full h-40">
+            class="flex flex-col  px-8 py-4 bg-gradient-to-r from-blue-500 via-cyan-500 to-gray-500 rounded-lg  w-full shadow-lg">
             <div class="flex flex-1 flex-row justify-between items-center ">
                 <div class="text-white text-xl font-bold">
                     Customer Rating
@@ -80,10 +142,12 @@
             </div>
             <div class="flex flex-0 justify-center items-bottom font-bold w-full ">
                 <div class="text-white text-3xl font-serif flex flex-row justify-end">
-                    <span *ngFor="let n of numSequence(5);let i = index;">
+                    <span *ngFor="let n of numSequence(4);let i = index;">
                         <mat-icon class="text-yellow-400 text-4xl mx-2">star</mat-icon>
                     </span>
-
+                    <span *ngFor="let n of numSequence(1);let i = index;">
+                        <mat-icon class="text-gray-400 text-4xl mx-2">star</mat-icon>
+                    </span>
                 </div>
             </div>
         </div>
@@ -91,10 +155,14 @@
 
     </div>
 
-    <div id="chart">
-        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
-            [fill]="chartOptions.fill" [stroke]="chartOptions.stroke" [responsive]="chartOptions.responsive">
-        </apx-chart>
+    <div class="w-full p-4 rounded">
+        <div class="bg-gray-100 rounded-xl p-2">
+            <div class="font-bold text-xl underline ">
+                <span class="flex justify-center">Most Sold Items.</span>
+            </div>
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                [title]="chartOptions.title" [colors]="chartOptions.colors"></apx-chart>
+        </div>
     </div>
-
 </div>
